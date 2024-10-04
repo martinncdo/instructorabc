@@ -1,0 +1,33 @@
+#select-letter {
+    font-size: 1.5rem;
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+}
+
+#select-letter > option {
+    font-size: 1.5rem;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.letter {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.container-letter {
+    border: thin solid black;
+    background-color: lightpink;
+    margin: .5rem;
+    padding: 2rem;
+    border-radius: .3rem;
+}
+
+.container-minuscula {
+    background-color: lightblue;
+}
