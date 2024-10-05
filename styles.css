@@ -21,7 +21,6 @@
 
 .main {
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
 }
@@ -50,4 +49,19 @@
 
 .container-minuscula {
     background-color: lightblue;
+}
+
+.abc {
+    margin: 1rem 0 1rem 0;
+    gap: .2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 80%;
+}
+
+.option-letter {
+    font-size: 1.7rem;
+    border: thin solid black;
+    text-align: center;
+    background-color: aliceblue;
 }
