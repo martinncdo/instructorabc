@@ -5,7 +5,6 @@ const $minuscula = document.querySelector(".minuscula");
 const $mayuscula = document.querySelector(".mayuscula");
 const $containerMinuscula = document.querySelector(".container-minuscula");
 const $containerMayuscula = document.querySelector(".container-mayuscula");
-const $letterP = document.querySelectorAll(".letter");
 const $wordsSection = document.querySelector(".section-words");
 const words = {
     "A": ["ACEITE", "ABRIL", "ADIVINAR"],
@@ -75,9 +74,8 @@ document.addEventListener("click", (e) => {
         $actualLetter.style.backgroundColor = 'lightgreen';
         $mayuscula.textContent = letter;
         $minuscula.textContent = letter.toLowerCase();
-        $letterP.forEach(el => {
-            el.dataset.letter = letter;
-        });
+        $mayuscula.dataset.letter = letter;
+        $minuscula.dataset.letter = letter.toLowerCase();
         $containerMayuscula.dataset.letter = letter;
         $containerMinuscula.dataset.letter = letter.toLowerCase();
         renderWords(letter);
