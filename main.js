@@ -7,38 +7,106 @@ const $mayuscula = document.querySelector(".mayuscula");
 const $containerMinuscula = document.querySelector(".container-minuscula");
 const $containerMayuscula = document.querySelector(".container-mayuscula");
 const $letterP = document.querySelectorAll(".letter");
+const $wordsSection = document.querySelector(".section-words");
+let i = 0;
+const words = {
+    "A": ["ACEITE", "ABRIL", "ADIVINAR"],
+    "B": ["BEBÉ", "BUSCAR", "BRILLANTE"],
+    "C": ["CIELO", "CORRER", "COMER"],
+    "D": ["DÍA", "DIBUJAR", "DULCE"],
+    "E": ["ELEFANTE", "ESCUCHAR", "ESCRIBIR"],
+    "F": ["FELIZ", "FUEGO", "FRUTA"],
+    "G": ["GATO", "GRANDE", "GUITARRA"],
+    "H": ["HOLA", " HACER", "HOGAR"],
+    "I": ["ISLA", "IR", "INFINITO"],
+    "J": ["JARDÍN", "JUGAR", "JOVEN"],
+    "K": ["KILO", "KARMA", "KIOSCO"],
+    "L": ["LUZ", "LEER", "LARGO"],
+    "M": ["MAR", "MESA", "MÚSICA"],
+    "N": ["NUBE", "NACER", "NOCHE"],
+    "O": ["OJO", "OÍR", "OSO"],
+    "P": ["PERRO", "PINTAR", "PLAYA"],
+    "Q": ["QUESO", "QUÍMICA", "QUIERO"],
+    "R": ["RÍO", "RÁPIDO", "REÍR"],
+    "S": ["SOL", "SALTAR", "SOMBRA"],
+    "T": ["TIERRA", "TOCAR", "TIEMPO"],
+    "U": ["UNIVERSO", "USAR", "UNO"],
+    "V": ["VIENTO", "VIAJAR", "VERDE"],
+    "W": ["WAFLE", "WHISKY", "WEB"],
+    "X": ["XILÓFONO", "XENÓN", "XEROGRAFÍA"],
+    "Y": ["YATE", "YOGUR", "YO"],
+    "Z": ["ZAPATO", "ZEBRA", "ZUMO"],
+};
+
+function textWVoice(text) {
+    if ('speechSynthesis' in window) {
+        var text = new SpeechSynthesisUtterance(text);
+        text.rate = 0.5;
+        window.speechSynthesis.speak(text);
+      }
+}
 
 function speakLetter(letter) {
-    if ('speechSynthesis' in window) {
-      var text = new SpeechSynthesisUtterance('Esta es la letra ' + letter);
-      window.speechSynthesis.speak(text);
+    i++;
+    if (i === 1) {
+        textWVoice('Esta es la letra ' + letter)
+    } else {
+        textWVoice(letter)
     }
   }
 
+const $options = document.querySelector(".abc");
+let $actualLetter;
+
 document.addEventListener("DOMContentLoaded", (e) => {
     letters.forEach(letter => {
-        let $optionElement = document.createElement('option');
-        $optionElement.textContent = letter;
-        $optionElement.value = letter;
-        $optionElement.id = letter;
-        $selectLetter.appendChild($optionElement);
+        const spanLetter = document.createElement('span');
+        spanLetter.textContent = letter;
+        spanLetter.className = 'option-letter';
+        if (letter === "A") {
+            spanLetter.style.backgroundColor = 'lightgreen';
+            $actualLetter = spanLetter;
+        }
+        $options.appendChild(spanLetter);
     })
-})
-
-$selectLetter.addEventListener("change", (e) => {
-    let selectedLetter = e.target.value;
-    $mayuscula.textContent = selectedLetter;
-    $minuscula.textContent = selectedLetter.toLowerCase();
-    $letterP.forEach(el => {
-        el.dataset.letter = selectedLetter;
-    });
-    $containerMayuscula.dataset.letter = selectedLetter;
-    $containerMinuscula.dataset.letter = selectedLetter.toLowerCase();
-    speakLetter(selectedLetter);
+    renderWords("A");
 })
 
 document.addEventListener("click", (e) => {
+    if (e.target.matches('.option-letter')) {
+        let letter = e.target.textContent;
+        $actualLetter.style.backgroundColor = 'aliceblue';
+        $actualLetter = e.target;
+        $actualLetter.style.backgroundColor = 'lightgreen';
+        $mayuscula.textContent = letter;
+        $minuscula.textContent = letter.toLowerCase();
+        $letterP.forEach(el => {
+            el.dataset.letter = letter;
+        });
+        $containerMayuscula.dataset.letter = letter;
+        $containerMinuscula.dataset.letter = letter.toLowerCase();
+        renderWords(letter);
+        speakLetter(letter);
+    }
+
     if (e.target.matches('.container-letter') || e.target.matches('.letter')) {
         speakLetter(e.target.dataset.letter);
     }
+
+    if (e.target.matches(".word")) {
+        if (i == 0) { i++ };
+        speakLetter(e.target.textContent);
+    }
 })
+
+
+function renderWords(letter) {
+    $wordsSection.innerHTML = "";
+    words[letter].forEach(word => {
+    let $wordP = document.createElement("p");
+    $wordP.textContent = word;
+    $wordP.className = "word";
+    $wordsSection.appendChild($wordP);
+   })
+    
+}
