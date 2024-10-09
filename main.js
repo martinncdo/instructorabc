@@ -1,5 +1,4 @@
 const synth = window.speechSynthesis;
-let voices;
 const $selectLetter = document.querySelector("#select-letter");
 const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 const $minuscula = document.querySelector(".minuscula");
@@ -23,6 +22,7 @@ const words = {
     "L": ["LUZ", "LEER", "LARGO"],
     "M": ["MAR", "MESA", "MÚSICA"],
     "N": ["NUBE", "NACER", "NOCHE"],
+    "Ñ": ["ÑANDÚ", "ÑOQUI"],
     "O": ["OJO", "OÍR", "OSO"],
     "P": ["PERRO", "PINTAR", "PLAYA"],
     "Q": ["QUESO", "QUÍMICA", "QUIERO"],
@@ -37,6 +37,7 @@ const words = {
     "Z": ["ZAPATO", "ZEBRA", "ZUMO"],
 };
 let i = 0;
+let j = 0;
 
 function textWVoice(text) {
     if ('speechSynthesis' in window) {
@@ -48,7 +49,7 @@ function textWVoice(text) {
 
 function speakLetter(letter) {
     i++;
-    if (i === 1) {
+    if (i === 1 || i === 3 && j === 1) {
         textWVoice('Esta es la letra ' + letter)
     } else {
         textWVoice(letter)
@@ -94,7 +95,7 @@ document.addEventListener("click", (e) => {
     }
 
     if (e.target.matches(".word")) {
-        if (i == 0) { i++ };
+        if (i == 0) { i++, j++ };
         speakLetter(e.target.textContent);
     }
 })
@@ -108,5 +109,4 @@ function renderWords(letter) {
     $wordP.className = "word";
     $wordsSection.appendChild($wordP);
    })
-    
 }
