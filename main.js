@@ -38,6 +38,7 @@ const words = {
 };
 let i = 0;
 let j = 0;
+let k = 0;
 
 function textWVoice(text) {
     if ('speechSynthesis' in window) {
@@ -49,7 +50,7 @@ function textWVoice(text) {
 
 function speakLetter(letter) {
     i++;
-    if (i === 1 || i === 3 && j === 1) {
+    if (i === 1) {
         textWVoice('Esta es la letra ' + letter)
     } else {
         textWVoice(letter)
@@ -95,7 +96,7 @@ document.addEventListener("click", (e) => {
     }
 
     if (e.target.matches(".word")) {
-        if (i == 0) { i++, j++ };
+        if (i == 0) { i++ }
         speakLetter(e.target.textContent);
     }
 })
