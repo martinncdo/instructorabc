@@ -37,8 +37,6 @@ const words = {
     "Z": ["ZAPATO", "ZEBRA", "ZUMO"],
 };
 let i = 0;
-let j = 0;
-let k = 0;
 
 function textWVoice(text) {
     if ('speechSynthesis' in window) {
@@ -48,13 +46,8 @@ function textWVoice(text) {
       }
 }
 
-function speakLetter(letter) {
-    i++;
-    if (i === 1) {
-        textWVoice('Esta es la letra ' + letter)
-    } else {
-        textWVoice(letter)
-    }
+function speakLetter(text) {
+    textWVoice(text)
   }
 
 const $options = document.querySelector(".abc");
@@ -88,7 +81,8 @@ document.addEventListener("click", (e) => {
         $containerMayuscula.dataset.letter = letter;
         $containerMinuscula.dataset.letter = letter.toLowerCase();
         renderWords(letter);
-        speakLetter(letter);
+        i++;
+        (i == 1) ? speakLetter('Esta es la letra ' + letter) : speakLetter(letter);
     }
 
     if (e.target.matches('.container-letter') || e.target.matches('.letter')) {
@@ -96,7 +90,6 @@ document.addEventListener("click", (e) => {
     }
 
     if (e.target.matches(".word")) {
-        if (i == 0) { i++ }
         speakLetter(e.target.textContent);
     }
 })
