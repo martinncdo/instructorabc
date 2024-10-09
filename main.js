@@ -8,7 +8,6 @@ const $containerMinuscula = document.querySelector(".container-minuscula");
 const $containerMayuscula = document.querySelector(".container-mayuscula");
 const $letterP = document.querySelectorAll(".letter");
 const $wordsSection = document.querySelector(".section-words");
-let i = 0;
 const words = {
     "A": ["ACEITE", "ABRIL", "ADIVINAR"],
     "B": ["BEBÉ", "BUSCAR", "BRILLANTE"],
@@ -37,6 +36,7 @@ const words = {
     "Y": ["YATE", "YOGUR", "YO"],
     "Z": ["ZAPATO", "ZEBRA", "ZUMO"],
 };
+let i = 0;
 
 function textWVoice(text) {
     if ('speechSynthesis' in window) {
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
         }
         $options.appendChild(spanLetter);
     })
-    renderWords("A");
+    renderWords("A")
 })
 
 document.addEventListener("click", (e) => {
