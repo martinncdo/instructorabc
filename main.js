@@ -104,7 +104,9 @@ document.addEventListener("click", (e) => {
         $actualLetter = e.target;
         $actualLetter.style.backgroundColor = 'lightgreen';
         $mayuscula.textContent = letter;
+        $mayuscula.style.backgroundColor = "inherit";
         $minuscula.textContent = letter.toLowerCase();
+        $minuscula.style.backgroundColor = "inherit";
         $mayuscula.dataset.letter = letter;
         $minuscula.dataset.letter = letter.toLowerCase();
         $containerMayuscula.dataset.letter = letter;
@@ -131,9 +133,9 @@ document.addEventListener("click", (e) => {
 function renderWords(letter) {
     $wordsSection.innerHTML = "";
     words[letter].forEach(word => {
-    const html = `<div style='display:flex; align-items: center;'>
-        <img src="${word.split('|')[1]}" class="img-word" style='height: 120px; width: 110px; display: inline;' alt="${word.split('|')[0]}">
-        <p class='word'>${word.split('|')[0]}</p>
+    const html = `<div style='display:flex; align-items: center; background-color: #fff; padding: .2rem; border-radius: .5rem; margin: .3rem;'>
+        <img src="${word.split('|')[1]}" class="img-word" style='height: 120px; width: 110px; display: inline; background-color: white;' alt="${word.split('|')[0]}">
+        <p class='word' style='background-color: #fff; padding: .3rem;'>${word.split('|')[0]}</p>
     </div>`;
     $wordsSection.insertAdjacentHTML("beforeend", html);
    })
