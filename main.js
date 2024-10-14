@@ -71,7 +71,7 @@ let i = 0;
 function textWVoice(text) {
     if ('speechSynthesis' in window) {
         var text = new SpeechSynthesisUtterance(text);
-        text.rate = 0.5;
+        text.rate = 0.9;
         window.speechSynthesis.speak(text);
       }
 }
